@@ -15,10 +15,11 @@ public class BookController {
     @Autowired
     GraphqlService graphqlService;
 
-    @PostMapping("/allBooks")
-    public ResponseEntity<Object> getAllBooks(@RequestBody String query){
+    @PostMapping("/book")
+    public ResponseEntity<ExecutionResult> getAllBooks(@RequestBody String query){
         System.out.printf("Query is : %s%n",query);
         ExecutionResult execute = graphqlService.getGraphQL().execute(query);
-        return new ResponseEntity<>(execute, HttpStatus.OK);
+        System.out.println("error is  " + execute.getErrors());
+        return new ResponseEntity<>(execute, execute.getErrors()!=null && execute.getErrors().size()>0 ? HttpStatus.BAD_REQUEST: HttpStatus.OK);
     }
 }

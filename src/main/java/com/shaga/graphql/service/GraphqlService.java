@@ -38,7 +38,6 @@ public class GraphqlService {
     BookDataFetcher bookDataFetcher;
     @PostConstruct
     private void loadSchema(){
-        loadBookDateInRepo();
         try {
             File schemaFile = resource.getFile();
             TypeDefinitionRegistry typeRegistry = new SchemaParser().parse(schemaFile);
@@ -64,14 +63,4 @@ public class GraphqlService {
         return graphql;
     }
 
-    private void loadBookDateInRepo(){
-        Book book1 = new Book("12344","Palace of Illusion","Penguin",new String [] {"Chitra Bannerjee"},"2008-01-01");
-        Book book2 = new Book("3456","Alchemist","Jaico",new String [] {"Paulo Coelho"},"1988-01-01");
-        Book book3 = new Book("4567","The Zaheer","Jaico",new String [] {"Paulo Coelho"},"2005-01-01");
-        List<Book> bookList = new LinkedList<>();
-        bookList.add(book1);
-        bookList.add(book2);
-        bookList.add(book3);
-        bookRepo.setBookList(bookList);
-    }
 }
