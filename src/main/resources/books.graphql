@@ -1,0 +1,17 @@
+schema{
+    query: Query
+}
+
+type Query{
+    allBooks: [Book!]!
+    book(isin:String): Book!
+}
+
+type Book{
+    isin: String!
+    title: String!
+    publisher: String!
+    author: [String!]!
+    publishingDate: String!
+}
+
